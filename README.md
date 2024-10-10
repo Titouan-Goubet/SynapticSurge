@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SynapticSurge
 
-## Getting Started
+## 🧠 Plateforme de Quiz en Temps Réel
 
-First, run the development server:
+SynapticSurge est une passionnante plateforme de quiz en temps réel actuellement en développement. Mettez vos connaissances à l'épreuve sur divers thèmes et affrontez d'autres joueurs dans des quiz rapides et captivants !
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 🌟 Thèmes de Quiz (En expansion)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Culture générale
+- Jeux vidéo
+- Géographie
+- Histoire
+- Sciences
+- Cinéma et TV
+- Musique
+- Sports
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🛠 Technologies (Prévues)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Next.js
+- Socket.IO
+- MySQL
+- Prisma
+- ShadCN UI
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🚧 Ce README est en cours d'évolution au fur et à mesure du développement du projet. Restez à l'écoute pour plus de mises à jour et de fonctionnalités ! 🚧
