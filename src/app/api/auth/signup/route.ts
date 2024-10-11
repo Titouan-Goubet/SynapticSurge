@@ -4,14 +4,12 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { hash } from "bcrypt";
 import { NextResponse } from "next/server";
 
-// Initialise Prisma Client
 const prisma = new PrismaClient();
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    // Validation des données avec Zod
     console.log("Données reçues:", body);
     const result = registerSchema.safeParse(body);
     if (!result.success) {
@@ -22,7 +20,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { email, password, username } = result.data; // Données validées par Zod
+    const { email, password, username } = result.data;
 
     // Hacher le mot de passe
     const hashedPassword = await hash(password, 10);
