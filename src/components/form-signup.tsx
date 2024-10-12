@@ -24,7 +24,6 @@ export default function FormSignup() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
 
-  // Initialisation de useForm avec zodResolver
   const form = useForm<RegisterSchemaType>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -43,11 +42,7 @@ export default function FormSignup() {
       const response = await fetch(`/api/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: values.username,
-          email: values.email,
-          password: values.password,
-        }),
+        body: JSON.stringify(values),
       });
 
       const result = await response.json();
@@ -67,14 +62,13 @@ export default function FormSignup() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen w-full  p-0 sm:p-4">
+    <div className="flex justify-center items-center h-screen w-full p-0 sm:p-4">
       <div className="w-full sm:max-w-md p-6 sm:p-8 bg-white rounded-lg shadow-md h-full sm:h-auto">
         <h2 className="text-3xl font-bold text-center mb-6 text-black sm:text-2xl">
           Inscription
         </h2>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            {/* Nouveau champ username */}
             <FormField
               control={form.control}
               name="username"
@@ -86,16 +80,15 @@ export default function FormSignup() {
                   <FormControl>
                     <Input
                       type="text"
-                      required
                       {...field}
                       className="w-full text-black p-4 sm:p-3"
                     />
                   </FormControl>
+                  <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
 
-            {/* Champ email */}
             <FormField
               control={form.control}
               name="email"
@@ -107,7 +100,6 @@ export default function FormSignup() {
                   <FormControl>
                     <Input
                       type="email"
-                      required
                       {...field}
                       className="w-full text-black p-4 sm:p-3"
                     />
@@ -115,12 +107,11 @@ export default function FormSignup() {
                   <FormDescription>
                     Votre email ne sera jamais partagé
                   </FormDescription>
-                  <FormMessage />
+                  <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
 
-            {/* Champ mot de passe */}
             <FormField
               control={form.control}
               name="password"
@@ -132,7 +123,6 @@ export default function FormSignup() {
                   <FormControl>
                     <div className="relative">
                       <Input
-                        required
                         type={showPassword ? "text" : "password"}
                         {...field}
                         className="w-full text-black p-4 sm:p-3"
@@ -154,12 +144,11 @@ export default function FormSignup() {
                     Votre mot de passe doit contenir au moins 8 caractères, une
                     majuscule et un chiffre
                   </FormDescription>
-                  <FormMessage />
+                  <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
 
-            {/* Champ de confirmation du mot de passe */}
             <FormField
               control={form.control}
               name="confirmPassword"
@@ -171,7 +160,6 @@ export default function FormSignup() {
                   <FormControl>
                     <div className="relative">
                       <Input
-                        required
                         type={showPassword ? "text" : "password"}
                         {...field}
                         className="w-full text-black p-4 sm:p-3"
@@ -192,12 +180,11 @@ export default function FormSignup() {
                   <FormDescription>
                     Retaper votre mot de passe pour confirmer
                   </FormDescription>
-                  <FormMessage />
+                  <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
 
-            {/* Message d'erreur du serveur */}
             {serverError && (
               <p className="text-red-500 text-center">{serverError}</p>
             )}
