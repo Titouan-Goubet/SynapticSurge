@@ -1,6 +1,9 @@
+import ResetPasswordEmail from "@/components/emails/forgot-password";
 import { sendEmail } from "@/lib/send-email";
 import { PrismaClient } from "@prisma/client";
+import { render } from "@react-email/render";
 import { NextResponse } from "next/server";
+import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const prisma = new PrismaClient();
@@ -26,17 +29,16 @@ export async function POST(request: Request) {
       data: { resetToken, resetTokenExpiry },
     });
 
+    const resetLink = `${process.env.NEXTAUTH_URL}/forgot-password?token=${resetToken}`;
+    const emailHtml = render(
+      React.createElement(ResetPasswordEmail, { resetLink })
+    );
+
     await sendEmail({
       to: email,
       from: process.env.EMAIL_FROM!,
-      subject: "Réinitialisation de votre mot de passe",
-      html: `
-        <p>Vous avez demandé une réinitialisation de votre mot de passe.</p>
-        <p>Cliquez sur le lien suivant pour réinitialiser votre mot de passe :</p>
-        <a href="${process.env.NEXTAUTH_URL}/reset-password?token=${resetToken}">Réinitialiser mon mot de passe</a>
-        <p>Ce lien expirera dans 1 heure.</p>
-        <p>Si vous n'avez pas demandé cette réinitialisation, vous pouvez ignorer cet e-mail.</p>
-      `,
+      subject: "Réinitialisation de votre mot de passe SynapticSurge",
+      html: emailHtml,
     });
 
     return NextResponse.json({
