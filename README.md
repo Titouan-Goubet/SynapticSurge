@@ -26,3 +26,4 @@ SynapticSurge est une passionnante plateforme de quiz en temps réel actuellemen
 ---
 
 🚧 Ce README est en cours d'évolution au fur et à mesure du développement du projet. Restez à l'écoute pour plus de mises à jour et de fonctionnalités ! 🚧
+.
