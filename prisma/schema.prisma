@@ -8,14 +8,16 @@ datasource db {
 }
 
 model User {
-  id             String   @id @default(uuid())
-  username       String   @unique
-  email          String   @unique
-  password       String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  profilePicture String?
-  role           Role     @default(USER)
+  id               String    @id @default(uuid())
+  username         String    @unique
+  email            String    @unique
+  password         String
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  profilePicture   String?
+  resetToken       String?   @unique
+  resetTokenExpiry DateTime?
+  role             Role      @default(USER)
 }
 
 enum Role {

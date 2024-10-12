@@ -1,8 +1,11 @@
+import { sendVerificationRequest } from "@/lib/resend-email";
 import { loginSchema } from "@/lib/validationSchema";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 import { compare } from "bcrypt";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import EmailProvider from "next-auth/providers/email";
 
 const prisma = new PrismaClient();
 
@@ -18,6 +21,7 @@ declare module "next-auth" {
 }
 
 export const authOptions: NextAuthOptions = {
+  adapter: PrismaAdapter(prisma),
   session: {
     strategy: "jwt",
   },
@@ -25,6 +29,10 @@ export const authOptions: NextAuthOptions = {
     signIn: "/login",
   },
   providers: [
+    EmailProvider({
+      from: process.env.EMAIL_FROM,
+      sendVerificationRequest,
+    }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -77,6 +85,12 @@ export const authOptions: NextAuthOptions = {
         session.user.email = token.email as string;
       }
       return session;
+    },
+  },
+  events: {
+    async signIn({ user }) {
+      // You can add custom logic here, e.g., logging
+      console.log(`User ${user.email} signed in`);
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
