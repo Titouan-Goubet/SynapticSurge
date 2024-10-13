@@ -1,4 +1,4 @@
-import { sendVerificationRequest } from "@/lib/resend-email";
+import { sendVerificationRequest } from "@/lib/send-verif-request";
 import { loginSchema } from "@/lib/validationSchema";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
@@ -27,11 +27,13 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/login",
+    verifyRequest: "/auth/verify-request",
   },
   providers: [
     EmailProvider({
       from: process.env.EMAIL_FROM,
       sendVerificationRequest,
+      maxAge: 10 * 60,
     }),
     CredentialsProvider({
       name: "Credentials",

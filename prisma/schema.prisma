@@ -11,13 +11,21 @@ model User {
   id               String    @id @default(uuid())
   username         String    @unique
   email            String    @unique
-  password         String
+  password         String?
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
   profilePicture   String?
   resetToken       String?   @unique
   resetTokenExpiry DateTime?
   role             Role      @default(USER)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
 
 enum Role {
