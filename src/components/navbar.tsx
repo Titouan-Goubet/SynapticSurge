@@ -15,10 +15,10 @@ export function Navbar() {
       </Link>
       <div className="space-x-4 flex items-center">
         <Button variant="ghost" asChild>
-          <Link href="/about">À propos</Link>
+          <Link href="/">À propos</Link>
         </Button>
         <Button variant="ghost" asChild>
-          <Link href="/leaderboard">Classement</Link>
+          <Link href="/">Classement</Link>
         </Button>
         {session ? (
           <>
@@ -36,10 +36,10 @@ export function Navbar() {
         ) : (
           <>
             <Button variant="ghost" asChild>
-              <Link href="/login">Connexion</Link>
+              <Link href="/auth/login">Connexion</Link>
             </Button>
             <Button variant="default" asChild>
-              <Link href="/signup">Inscription</Link>
+              <Link href="/auth/signup">Inscription</Link>
             </Button>
           </>
         )}
