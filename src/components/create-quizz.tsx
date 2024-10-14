@@ -7,17 +7,10 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -88,28 +81,22 @@ export default function CreateQuizPage() {
 
   return (
     <div className="container mx-auto py-10">
+      <h1 className="text-4xl font-bold text-center text-black mb-8">
+        Créer un nouveau quiz
+      </h1>
       <Card>
-        <CardHeader>
-          <CardTitle>Créer un nouveau quiz</CardTitle>
-          <CardDescription>
-            Remplissez les informations pour créer votre quiz.
-          </CardDescription>
-        </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
               <FormField
                 control={form.control}
                 name="title"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="mt-10">
                     <FormLabel>Titre du quiz</FormLabel>
                     <FormControl>
                       <Input placeholder="Entrez le titre du quiz" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      Choisissez un titre accrocheur pour votre quiz.
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -123,9 +110,6 @@ export default function CreateQuizPage() {
                     <FormControl>
                       <Input placeholder="Entrez le thème du quiz" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      Choisissez un thème général pour votre quiz.
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -143,9 +127,6 @@ export default function CreateQuizPage() {
                         {...field}
                       />
                     </FormControl>
-                    <FormDescription>
-                      Vous pouvez ajouter une brève description de votre quiz.
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -167,11 +148,12 @@ export default function CreateQuizPage() {
                       control={form.control}
                       name={`questions.${index}.text`}
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="mb-6">
                           <FormLabel>Question {index + 1}</FormLabel>
                           <FormControl>
                             <Input
                               placeholder="Entrez votre question"
+                              className="bg-primary/5 border-primary/20"
                               {...field}
                             />
                           </FormControl>
@@ -185,11 +167,14 @@ export default function CreateQuizPage() {
                         control={form.control}
                         name={`questions.${index}.options.${optionIndex}`}
                         render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Option {optionIndex + 1}</FormLabel>
+                          <FormItem className="mb-4">
+                            <FormLabel className="text-sm text-muted-foreground">
+                              Option {optionIndex + 1}
+                            </FormLabel>
                             <FormControl>
                               <Input
                                 placeholder={`Option ${optionIndex + 1}`}
+                                className="bg-secondary/10 border-secondary/20"
                                 {...field}
                               />
                             </FormControl>
@@ -202,7 +187,7 @@ export default function CreateQuizPage() {
                       control={form.control}
                       name={`questions.${index}.correctOptionIndex`}
                       render={({ field }) => (
-                        <FormItem className="space-y-3">
+                        <FormItem className="space-y-3 mt-6 p-4 bg-muted rounded-md">
                           <FormLabel>Réponse correcte</FormLabel>
                           <FormControl>
                             <RadioGroup
