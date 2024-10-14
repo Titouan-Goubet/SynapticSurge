@@ -8,6 +8,7 @@ export async function sendVerificationRequest(params: {
   url: string;
   provider: { from: string };
 }) {
+  console.log("Verification URL:", params.url);
   const { identifier, url, provider } = params;
   const { from } = provider;
 

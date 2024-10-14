@@ -20,6 +20,7 @@ import { useForm } from "react-hook-form";
 
 export default function LoginForm() {
   const router = useRouter();
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
@@ -78,6 +79,9 @@ export default function LoginForm() {
         setServerError(response.error);
       } else {
         setEmailSent(true);
+        setSuccessMessage(
+          "Un email de connexion a été envoyé à votre adresse."
+        );
       }
     } catch (error) {
       setIsSubmitting(false);
@@ -166,6 +170,9 @@ export default function LoginForm() {
 
               {serverError && (
                 <p className="text-red-500 text-center">{serverError}</p>
+              )}
+              {successMessage && (
+                <p className="text-green-600 text-center">{successMessage}</p>
               )}
 
               <Button

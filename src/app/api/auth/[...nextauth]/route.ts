@@ -27,7 +27,7 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/login",
-    verifyRequest: "/auth/verify-request",
+    verifyRequest: "/verify-request",
   },
   providers: [
     EmailProvider({
@@ -74,6 +74,10 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    async signIn({ user, account, profile, email }) {
+      console.log("SignIn callback", { user, account, profile, email });
+      return true;
+    },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
@@ -88,10 +92,14 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      else if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
+    },
   },
   events: {
     async signIn({ user }) {
-      // You can add custom logic here, e.g., logging
       console.log(`User ${user.email} signed in`);
     },
   },
