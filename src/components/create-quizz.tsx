@@ -58,6 +58,7 @@ const defaultValues: Partial<QuizFormValues> = {
 
 export default function CreateQuizPage() {
   const [activeTab, setActiveTab] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<QuizFormValues>({
     resolver: zodResolver(quizFormSchema),
@@ -65,8 +66,30 @@ export default function CreateQuizPage() {
     mode: "onChange",
   });
 
-  function onSubmit(data: QuizFormValues) {
-    console.log(data);
+  async function onSubmit(data: QuizFormValues) {
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("/api/quiz/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        form.reset();
+        // Rajouter plus tard une redirection vers la page du quiz par ex
+      } else {
+        throw new Error(result.error);
+      }
+    } catch (error) {
+      console.error("Erreur lors de la soumission du formulaire:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   const addQuestion = () => {
@@ -223,7 +246,9 @@ export default function CreateQuizPage() {
               <Button type="button" variant="outline" onClick={addQuestion}>
                 Ajouter une question
               </Button>
-              <Button type="submit">Créer le quiz</Button>
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Création en cours..." : "Créer le quiz"}
+              </Button>
             </form>
           </Form>
         </CardContent>
