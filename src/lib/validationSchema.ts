@@ -54,7 +54,29 @@ export const passwordSchema = z
     path: ["confirmNewPassword"],
   });
 
+export const quizFormSchema = z.object({
+  title: z
+    .string()
+    .min(2, { message: "Le titre doit contenir au moins 2 caractères." }),
+  theme: z
+    .string()
+    .min(2, { message: "Le thème doit contenir au moins 2 caractères." }),
+  description: z.string().optional(),
+  questions: z
+    .array(
+      z.object({
+        text: z.string().min(1, { message: "La question est requise" }),
+        options: z
+          .array(z.string())
+          .length(4, "Exactement 4 options sont requises"),
+        correctOptionIndex: z.number().min(0).max(3),
+      })
+    )
+    .min(1, { message: "Au moins une question est requise" }),
+});
+
 export type LoginSchemaType = z.infer<typeof loginSchema>;
 export type RegisterSchemaType = z.infer<typeof registerSchema>;
 export type EmailFormType = z.infer<typeof emailSchema>;
 export type PasswordFormType = z.infer<typeof passwordSchema>;
+export type QuizFormValues = z.infer<typeof quizFormSchema>;
