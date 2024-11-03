@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { QuizFormValues } from "@/lib/validationSchema";
+import { QuizFormValues } from "@/lib/zod/validationSchema";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import QuizQuestion from "./quiz-question";

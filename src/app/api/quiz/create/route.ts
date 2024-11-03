@@ -1,4 +1,4 @@
-import prisma from "@/lib/prisma";
+import prisma from "@/lib/db/prisma";
 import { QuizData } from "@/lib/types/QuizData";
 import { NextResponse } from "next/server";
 

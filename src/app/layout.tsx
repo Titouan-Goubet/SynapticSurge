@@ -1,11 +1,8 @@
-import { Footer } from "@/components/footer";
-import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/layout/footer";
+import { Navbar } from "@/components/layout/navbar";
 import { Providers } from "@/components/providers";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "SynapticSurge",
@@ -19,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body className={`${inter.className} flex flex-col min-h-screen`}>
+      <body className="flex flex-col min-h-screen">
         <Providers>
           <Navbar />
           <main className="flex-grow container mx-auto px-4 py-8">

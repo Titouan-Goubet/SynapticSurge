@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { loginSchema, LoginSchemaType } from "@/lib/validationSchema";
+import { loginSchema, LoginSchemaType } from "@/lib/zod/validationSchema";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";

@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { QuizFormValues, quizFormSchema } from "@/lib/validationSchema";
+import { QuizFormValues, quizFormSchema } from "@/lib/zod/validationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";

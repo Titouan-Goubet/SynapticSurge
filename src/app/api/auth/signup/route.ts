@@ -1,4 +1,4 @@
-import { registerSchema } from "@/lib/validationSchema";
+import { registerSchema } from "@/lib/zod/validationSchema";
 import { PrismaClient } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { hash } from "bcrypt";

@@ -6,7 +6,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { QuizFormValues } from "@/lib/validationSchema";
+import { QuizFormValues } from "@/lib/zod/validationSchema";
 import { useFormContext } from "react-hook-form";
 
 interface QuizOptionsProps {

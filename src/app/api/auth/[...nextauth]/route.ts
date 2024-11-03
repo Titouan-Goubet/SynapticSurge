@@ -1,5 +1,5 @@
 import { sendVerificationRequest } from "@/lib/send-verif-request";
-import { loginSchema } from "@/lib/validationSchema";
+import { loginSchema } from "@/lib/zod/validationSchema";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 import { compare } from "bcrypt";

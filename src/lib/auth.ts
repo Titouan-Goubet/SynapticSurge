@@ -1,8 +1,8 @@
-import prisma from "@/lib/prisma";
+import prisma from "@/lib/db/prisma";
 import { compare } from "bcrypt";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { loginSchema } from "./validationSchema";
+import { loginSchema } from "./zod/validationSchema";
 
 export const authOptions: NextAuthOptions = {
   session: {
