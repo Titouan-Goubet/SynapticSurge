@@ -42,12 +42,19 @@ model Quiz {
 }
 
 model Question {
-  id                 String @id @default(cuid())
+  id                 String   @id @default(cuid())
   text               String
-  options            String
+  options            Option[]
   correctOptionIndex Int
-  quiz               Quiz   @relation(fields: [quizId], references: [id])
+  quiz               Quiz     @relation(fields: [quizId], references: [id])
   quizId             String
+}
+
+model Option {
+  id         String   @id @default(cuid())
+  text       String
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId String
 }
 
 enum Role {
