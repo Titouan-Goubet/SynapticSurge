@@ -1,9 +1,10 @@
 import prisma from "@/lib/prisma";
+import { QuizData } from "@/lib/types/QuizData";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { title, theme, description, questions } = await req.json();
+    const { title, theme, description, questions }: QuizData = await req.json();
 
     const quiz = await prisma.quiz.create({
       data: {
@@ -11,21 +12,23 @@ export async function POST(req: Request) {
         theme,
         description,
         questions: {
-          create: questions.map(
-            (q: {
-              text: string;
-              options: string[];
-              correctOptionIndex: number;
-            }) => ({
-              text: q.text,
-              options: q.options,
-              correctOptionIndex: q.correctOptionIndex,
-            })
-          ),
+          create: questions.map((q) => ({
+            text: q.text,
+            correctOptionIndex: q.correctOptionIndex,
+            options: {
+              create: q.options.map((optionText) => ({
+                text: optionText,
+              })),
+            },
+          })),
         },
       },
       include: {
-        questions: true,
+        questions: {
+          include: {
+            options: true,
+          },
+        },
       },
     });
 
